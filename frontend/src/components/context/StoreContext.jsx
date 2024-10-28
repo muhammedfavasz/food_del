@@ -5,7 +5,7 @@ export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
-  const url = "http://localhost:4000/"; // Ensure this has a trailing slash
+  const url = "https://food-del-backend-rg49.onrender.com"; // Ensure this has a trailing slash
   const [token, setToken] = useState("");
 
   const [food_list, setFoodList] = useState([]);
