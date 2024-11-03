@@ -8,11 +8,16 @@ import { useState } from "react";
 import LoginPopup from "./components/loginPopup/LoginPopup";
 import Verify from "./pages/verify/Verify";
 import MyOrders from "./pages/MyOrders/MyOrders";
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const App = () => {
   const [showlogin, setShowLogin] = useState(false);
   return (
     <>
-      {showlogin ? <LoginPopup setShowLogin={setShowLogin} /> : <></>}
+      <ToastContainer />
+      {showlogin && <LoginPopup setShowLogin={setShowLogin} />}
       <div className="app">
         <Navbar setShowLogin={setShowLogin} />
         <Routes>

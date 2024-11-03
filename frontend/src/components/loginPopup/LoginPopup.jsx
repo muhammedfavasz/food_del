@@ -20,26 +20,34 @@ const LoginPopup = ({ setShowLogin }) => {
     setData((data) => ({ ...data, [name]: value }));
   };
 
-  const onLogin = async (event) => {
-    event.preventDefault();
-    const endpoint = currentState === "Login" ? "login" : "register";
-    const newUrl = `${url}api/user/${endpoint}`;
+const onLogin = async (event) => {
+   event.preventDefault();
+   console.log("Form submitted"); // Check if form submission is working
 
-    try {
+   const endpoint = currentState === "Login" ? "login" : "register";
+   const newUrl = `${url}api/user/${endpoint}`;
+   
+   console.log("Endpoint:", endpoint); // Check endpoint selection
+   console.log("URL:", newUrl); // Verify constructed URL
+   console.log("Data:", data); // Log data being sent in the request
+
+   try {
       const response = await axios.post(newUrl, data);
+      console.log("Response:", response); // Log response to see if request was successful
       if (response.data.success) {
-        setToken(response.data.token);
-        localStorage.setItem("token", response.data.token);
-
-        toast.success("Success!");
-        setShowLogin(false);
+         setToken(response.data.token);
+         localStorage.setItem("token", response.data.token);
+         toast.success("Success!");
+         setShowLogin(false);
       } else {
-        toast.error(response.data.message);
+         toast.error(response.data.message);
       }
-    } catch (error) {
+   } catch (error) {
+      console.error("Error in axios request:", error); // Catch any errors from axios
       toast.error("An error occurred. Please try again.");
-    }
-  };
+   }
+};
+
 
   console.log("Token stored:", localStorage.getItem("token"));
 
